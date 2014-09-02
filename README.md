@@ -22,23 +22,25 @@ and install the archetype into your local repository using
 
 then create a new project based on the archetype
 
-mvn archetype:generate \
--B \
--DarchetypeArtifactId=appengine-multi-module-skeleton-archetype \
--DarchetypeGroupId=eu.tuxoo \
--DarchetypeVersion=1.0 \
--DgroupId=com.mypackage \
--DartifactId=gaemultimodule \
--Dversion=1.0 \
--Dpackage=com.mypackage \
--Dgoals=install
+	mvn archetype:generate \
+	-B \
+	-DarchetypeArtifactId=appengine-multi-module-skeleton-archetype \
+	-DarchetypeGroupId=eu.tuxoo \
+	-DarchetypeVersion=1.0 \
+	-DgroupId=com.mypackage \
+	-DartifactId=gaemultimodule \
+	-Dversion=1.0 \
+	-Dpackage=com.mypackage \
+	-Dgoals=install
 
 This will generate a new project in a directory *gaemultimodule* and build it after creation.
 
 The project can be started immediatelly on the devserver:
 
-cd gaemultimodule/ear
-mvn appengine:devserver
+	cd gaemultimodule/ear
+	mvn appengine:devserver
 
-Now the frontend is accessable on http://localhost:8080 and the admin is accessable on http://localhost:8081
+Now the frontend is accessable on [http://localhost:8080](http://localhost:8080)
+
+and the admin is accessable on [http://localhost:8081](http://localhost:8081)
 
