@@ -22,6 +22,7 @@ and install the archetype into your local repository using
 
 then create a new project based on the archetype
 
+	cd ..
 	mvn archetype:generate \
 	-B \
 	-DarchetypeArtifactId=appengine-multi-module-skeleton-archetype \
