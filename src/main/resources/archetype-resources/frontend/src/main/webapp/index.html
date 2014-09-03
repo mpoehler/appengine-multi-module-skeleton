@@ -1,12 +1,57 @@
-#set( $symbol_pound = '#' )
-#set( $symbol_dollar = '$' )
-#set( $symbol_escape = '\' )
 <!doctype html>
 <html lang="en">
 <head>
     <title>frontend</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body>
 <h1>frontend</h1>
+
+<ul id="list">
+</ul>
+
+Note: Delete is only allowed for administrators. The Error is expected ;-)
+
+<script type="application/javascript">
+    $( document ).ready(function() {
+        function listAllPersons() {
+
+            // clean list div element
+            $("#list").empty();
+
+            // fetch all Persons from server and add them to the list
+            $.ajax({
+                type: "GET",
+                url: "/person/fetchAll",
+                success: function(data) {
+                    console.log("Data from server: " + data);
+                    $.each(data, function(index, value) {
+                        console.log('Name: ' + value.name + ', Id: ' + value.id);
+                        $('#list').append('<li>'+value.name+' <a href="#" data-id="'+value.id+'">X</a></li>');
+                    });
+                    $("#list a").click(deleteItem);
+                },
+                error: function() { console.log("Ups. Something went wrong.") }
+            });
+        }
+
+        listAllPersons();
+
+        function deleteItem(event) {
+            console.log('Delete this item. ID:' + $(event.target).attr("data-id"));
+            $.ajax({
+                type: "DELETE",
+                url: "/person/"+$(event.target).attr("data-id"),
+                success: function() {
+                    console.log("Person deleted.")
+                    listAllPersons();
+                },
+                error: function() { console.log("Ups. Something went wrong.") }
+            });
+            return false;
+        }
+    });
+</script>
+
 </body>
 </html>
